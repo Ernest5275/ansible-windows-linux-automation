@@ -1,0 +1,21 @@
+---
+- name: Create users from a CSV file with a custom module
+  hosts: localhost
+  become: yes
+
+  vars:
+    csv_file: "{{ playbook_dir }}/../../data/users.csv"
+    library_dir: "{{ playbook_dir }}/../../library"
+
+  tasks:
+    - name: Read the CSV file
+      community.general.read_csv:
+        path: "{{ csv_file }}"
+      register: users_list
+
+    - name: Create each user with the custom BASH script
+      ansible.builtin.command: >
+        {{ library_dir }}/add_user.sh
+        {{ item.username }} {{ item.firstname }} {{ item.lastname }} {{ item.password }}
+      loop: "{{ users_list.list }}"
+      no_log: true

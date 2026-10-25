@@ -1,0 +1,28 @@
+---
+- name: Delete users listed in a CSV file
+  hosts: ubuntu
+  become: yes
+
+  vars:
+    csv_file: "{{ playbook_dir }}/../../data/users.csv"
+    library_dir: "{{ playbook_dir }}/../../library"
+
+  tasks:
+    - name: Copy the CSV file to the remote host
+      ansible.builtin.copy:
+        src: "{{ csv_file }}"
+        dest: /tmp/users.csv
+        mode: "0600"
+
+    - name: Run the custom delete script
+      ansible.builtin.script: "{{ library_dir }}/delete_users.sh /tmp/users.csv"
+      register: delete_output
+
+    - name: Show deletion results
+      ansible.builtin.debug:
+        var: delete_output.stdout_lines
+
+    - name: Remove the CSV file from the remote host
+      ansible.builtin.file:
+        path: /tmp/users.csv
+        state: absent

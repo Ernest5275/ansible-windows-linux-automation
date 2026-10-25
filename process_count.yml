@@ -1,0 +1,14 @@
+---
+- name: Count running processes on Ubuntu
+  hosts: ubuntu
+  become: yes
+
+  tasks:
+    - name: Count running processes
+      ansible.builtin.shell: "ps -e | wc -l"
+      register: process_count
+      changed_when: false
+
+    - name: Display the process count
+      ansible.builtin.debug:
+        msg: "Total running processes: {{ process_count.stdout }}"

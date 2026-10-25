@@ -1,0 +1,11 @@
+---
+- name: Install IIS on Windows Server
+  hosts: windows
+  gather_facts: no
+
+  tasks:
+    - name: Install the IIS Web Server role
+      ansible.windows.win_feature:
+        name: Web-Server
+        state: present
+        include_management_tools: yes

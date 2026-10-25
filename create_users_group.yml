@@ -1,0 +1,27 @@
+---
+- name: Create users and a group on Windows Server
+  hosts: windows
+  gather_facts: no
+
+  vars:
+    lab_group: LabGroup
+
+  tasks:
+    - name: Create the local group
+      ansible.windows.win_group:
+        name: "{{ lab_group }}"
+        description: Group created with Ansible
+        state: present
+
+    - name: Create local users and add them to the group
+      ansible.windows.win_user:
+        name: "{{ item }}"
+        password: "{{ windows_default_password }}"
+        state: present
+        password_never_expires: true
+        groups:
+          - "{{ lab_group }}"
+      loop:
+        - user1
+        - user2
+      no_log: true

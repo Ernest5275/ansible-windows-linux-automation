@@ -1,0 +1,8 @@
+---
+- name: Remove Apache from Windows Server
+  hosts: windows
+  tasks:
+    - name: Uninstall the Apache MSI package
+      ansible.windows.win_package:
+        path: C:\ansible_examples\httpd-2.2.25-win32-x86-no_ssl.msi
+        state: absent
