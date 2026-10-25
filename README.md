@@ -1,4 +1,4 @@
-[delete_users.sh](https://github.com/user-attachments/files/33918147/delete_users.sh)# Ansible Automation for Windows & Linux ⚙️🤖
+# Ansible Automation for Windows & Linux ⚙️🤖
 **Academic Project, ECPI University** | Infrastructure Automation | Mar – Apr 2026
 
 ## 📋 Overview
