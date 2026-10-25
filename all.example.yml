@@ -1,4 +1,4 @@
-# Copy to inventory/group_vars/all.yml and encrypt it:
-#   ansible-vault encrypt inventory/group_vars/all.yml
+# Copy to group_vars/all.yml and encrypt it:
+#   ansible-vault encrypt group_vars/all.yml
 # Never commit real passwords to Git.
 windows_default_password: "CHANGE_ME"

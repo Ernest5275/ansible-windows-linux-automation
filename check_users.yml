@@ -4,7 +4,7 @@
   gather_facts: no
 
   vars:
-    user_list: "{{ lookup('file', playbook_dir + '/../../data/usernames.csv').splitlines() }}"
+    user_list: "{{ lookup('file', playbook_dir + '/usernames.csv').splitlines() }}"
 
   tasks:
     - name: Check if each user exists (custom Python module)
